@@ -55,14 +55,13 @@ class Proj03RunnerHtmlHandler extends JFrame implements HyperlinkListener {
                 forward.addActionListener(e -> actionForward());
 
                 txtField = new JTextField(35);
-                txtField.addKeyListener(new KeyAdapter() {
-                    @Override
-                    public void keyReleased(KeyEvent e) {
-                        if (e.getKeyCode() == KeyEvent.VK_ENTER) {
-                            actionGo();
-                        }
-                    }
-                });
+                txtField.addActionListener(e -> actionGo());
+                /*
+                 * txtField.addKeyListener(new KeyAdapter() {
+                 * 
+                 * @Override public void keyReleased(KeyEvent e) { if (e.getKeyCode() ==
+                 * KeyEvent.VK_ENTER) { actionGo(); } } });
+                 */
                 txtField.setText(website);
 
                 buttons.add(back);
@@ -73,12 +72,12 @@ class Proj03RunnerHtmlHandler extends JFrame implements HyperlinkListener {
                 JViewport vp = scroller.getViewport();
                 vp.add(html);
 
+                this.setLayout(new BorderLayout());
                 this.getContentPane().add(scroller, BorderLayout.CENTER);
                 this.getContentPane().add(buttons, BorderLayout.NORTH);
                 this.setSize(669, 669);
                 this.setVisible(true);
                 this.currentUrl = website;
-                System.out.println(this.currentUrl);
             } // end if
 
         } catch (Exception e) {
@@ -93,7 +92,6 @@ class Proj03RunnerHtmlHandler extends JFrame implements HyperlinkListener {
             if (backList.isEmpty()) {
                 return;
             }
-            System.out.println(currentUrl);
             forwardList.add(currentUrl);
             this.currentUrl = backList.get(backList.size() - 1);
             showPage(new URL(backList.get(backList.size() - 1)));
@@ -110,7 +108,6 @@ class Proj03RunnerHtmlHandler extends JFrame implements HyperlinkListener {
             if (forwardList.isEmpty()) {
                 return;
             }
-            System.out.println(currentUrl);
             backList.add(currentUrl);
             this.currentUrl = forwardList.get(forwardList.size() - 1);
             showPage(new URL(forwardList.get(forwardList.size() - 1)));
@@ -128,13 +125,15 @@ class Proj03RunnerHtmlHandler extends JFrame implements HyperlinkListener {
         txtField.setText(currUrl.toString());
     }
 
-    private void updateButtons() {
-        if (backList.size() > 1) {
+    private void updateButtons(URL url) {
+        int currBIndx = backList.indexOf(url.toString());
+
+        if (backList.size() >= 1 && currBIndx != 0) {
             back.setEnabled(true);
         } else {
             back.setEnabled(false);
         }
-        if (forwardList.size() > 1) {
+        if (!forwardList.isEmpty()) {
             forward.setEnabled(true);
         } else {
             forward.setEnabled(false);
@@ -162,12 +161,10 @@ class Proj03RunnerHtmlHandler extends JFrame implements HyperlinkListener {
 
             if (!currentUrl.equals(page.toString())) {
                 this.backList.add(this.currentUrl);
-                System.out.println("added to backlist");
             }
             this.currentUrl = page.toString();
-            System.out.println(this.currentUrl);
             updateUrl(page);
-            updateButtons();
+            updateButtons(page);
 
         } catch (Exception e) {
             e.printStackTrace();
