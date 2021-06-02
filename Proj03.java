@@ -1,11 +1,10 @@
 /*File Proj03.java
-Copyright 2014, R.G.Baldwin
-Rev 03/05/14
+Advanced Java course
 
 ****************************************************/
-class Proj03{
-  public static void main(String[] args){
+class Proj03 {
+  public static void main(String[] args) {
     Proj03Runner obj = new Proj03Runner();
     obj.run("http://www.dickbaldwin.com/tocdsp.htm");
-  }//end main
-}//end Proj03
+  }// end main
+}// end Proj03

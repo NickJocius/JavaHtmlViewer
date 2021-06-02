@@ -4,8 +4,6 @@ import javax.swing.event.*;
 import javax.swing.text.html.*;
 import java.util.*;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class Proj03Runner {
 
