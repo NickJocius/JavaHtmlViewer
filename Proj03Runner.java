@@ -56,12 +56,6 @@ class Proj03RunnerHtmlHandler extends JFrame implements HyperlinkListener {
 
                 txtField = new JTextField(35);
                 txtField.addActionListener(e -> actionGo());
-                /*
-                 * txtField.addKeyListener(new KeyAdapter() {
-                 * 
-                 * @Override public void keyReleased(KeyEvent e) { if (e.getKeyCode() ==
-                 * KeyEvent.VK_ENTER) { actionGo(); } } });
-                 */
                 txtField.setText(website);
 
                 buttons.add(back);
